@@ -10,8 +10,16 @@ and open the template in the editor.
         <title>titolo</title>
     </head>
     <body>
+        <h1>Ciao</h1>
+        <select>
         <?php
-        // put your code here
+        for ($i=0;$i<10;$i++)
+        {
+            ?>
+            <option value="<?php echo $i ;?>" >Valore <?php echo $i ;?></option>
+        <?php
+            }
         ?>
+        </select>
     </body>
 </html>
