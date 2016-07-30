@@ -1,8 +1,4 @@
 <?php
-
-include_once 'Studente.php';
-include_once 'Insegnamento.php';
-
 /**
  * Model class
  *

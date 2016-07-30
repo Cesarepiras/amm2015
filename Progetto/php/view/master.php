@@ -25,14 +25,14 @@ if (!$vd->isJson()) {
             <meta http-equiv="content-type" content="text/html; charset=utf-8" />
             <title><?= $vd->getTitolo() ?></title>
             <base href="<?= Settings::getApplicationPath() ?>php/"/>
-            <meta name="keywords" content="TTDM" />
-            <meta name="description" content="The third dimension's market" />
+            <meta name="keywords" content="TCE" />
+            <meta name="description" content="The Cuttin' Edge" />
             <link rel="shortcut icon" type="image/x-icon" href="../images/tab.png" />
             <link href="../css/responsive.css" rel="stylesheet" type="text/css" media="screen" />
             <?php
             foreach ($vd->getScripts() as $script) {
                 ?>
-                <script type="text/javascript" src="<?= $script ?>"></script>
+                <script type="text/javascript" src="//<?= $script ?>"></script>
                 <?php
             }
             ?>
@@ -53,7 +53,7 @@ if (!$vd->isJson()) {
                     <!--  header -->
                     <div id="header">
                         <div id="logo">
-                            <h1>TTDM: The Third Dimension's Market</h1>
+                            <h1>The Cuttin' Edge</h1>
                         </div>
 
                         <!-- select per la versione del menu mobile -->
@@ -84,10 +84,10 @@ if (!$vd->isJson()) {
                             ?>
                         </li>
                         <li id="external">
-                            <h2 class="icon-title">External links</h2>
+                            <h2 class="icon-title">Links esterni</h2>
                             <ul>
-                                <li><a href="http://www.unica.it/">University of Cagliari</a></li>
-                                <li><a href="http://informatica.unica.it/">CS faculty website</a></li>
+                                <li><a href="http://www.unica.it/">Università di Cagliari</a></li>
+                                <li><a href="http://informatica.unica.it/">Facoltà informatica</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -143,7 +143,7 @@ if (!$vd->isJson()) {
                 <footer>
                     <div id="footer">
                         <p>
-                            System Administration 2015 Project by Cesare Piras.
+                            Progetto Amministrazione di Sistema di Cesare Piras.
                         </p>
 
 

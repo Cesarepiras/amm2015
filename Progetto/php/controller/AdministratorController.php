@@ -239,7 +239,7 @@ class AdministratorController extends BaseController {
                     // Search model
                     case 'e_cerca':
                         $msg = array();
-                        $this->creaFeedbackUtente($msg, $vd, "Lo implementiamo con il db, fai conto che abbia funzionato ;)");
+                        $this->creaFeedbackUtente($msg, $vd, "Lo implementiamo con il db ;)");
                         $this->showHomeUtente($vd);
                         break;
 

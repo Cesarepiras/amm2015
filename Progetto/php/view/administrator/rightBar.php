@@ -4,36 +4,36 @@ switch ($vd->getSottoPagina()) {
     case 'anagrafica':
         ?>
         <p>
-            In this page you can edit your personal infos, as:
+            In questa pagina puoi visualizzare e modificare:
         </p>
         <ul>
             <li>
-                Your <strong>generic infos</strong>.
+                Le tue <strong>Info generiche</strong>.
             </li>
             <li>
-                Your <strong>contacts</strong>.
+                I tuoi <strong>contatti</strong>.
             </li>
             <li>
-                Your <strong>password</strong>.
+                La tua <strong>password</strong>.
             </li>
         </ul>
         <?php break; ?>
 
     <?php case 'modelli': ?>
         <p>
-            In this page you can view and edit the 3d models' database. You can:
+            In questa pagina puoi editare, cancellare e inserire foto di coltelli:
         </p>
         <ul>
             <li>
-                Upload a new 3D model by pressing the button <em>Upload new model</em>.
+                Aggiungi nuovi coltelli premendo :<em>Carica nuovo coltello</em>.
             </li>
             <li>
-                Edit an existing model by pressing the button <em>Edit Model</em>, 
-                (the <img  src="../images/edit-action.png" alt="icona modifica"> icon).
+                Modifica un coltello premendo :<em>Modifica coltello</em>, 
+                <img  src="../images/edit-action.png" alt="icona modifica">.
             </li>
             <li>
-                Delete an existing model by pressing the button <em>Delete Model</em>, 
-                (the <img  src="../images/delete-action.png" alt="icona elimina"> icon).
+                Cancellare un coltello dal database premendo : <em>Cancella coltello</em>, 
+                <img  src="../images/delete-action.png" alt="icona elimina">.
             </li>
         </ul>
         <?php break; ?>

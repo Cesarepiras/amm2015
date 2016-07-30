@@ -1,5 +1,5 @@
-<h2 class="icon-title" id="h-iscrizione">3d models database</h2>
-<h4>User's infos</h1>
+<h2 class="icon-title" id="h-iscrizione">Database Coltelli</h2>
+<h4>Info Utente</h1>
 <ul class="none">
     <li><strong>Userame:</strong> <?= $user->getUsername() ?></li>
 </ul>
@@ -9,11 +9,11 @@
         <thead>
             <tr>
                 <th class="iscrizione-col-small">ID</th>
-                <th class="iscrizione-col-small">Date</th>
-                <th class="iscrizione-col-small">Dimension (Mb)</th>
-                <th class="iscrizione-col-small">Name</th>
-                <th class="iscrizione-col-small">Uploader</th>
-                <th class="iscrizione-col-small">Description</th>
+                <th class="iscrizione-col-small">Data</th>
+                <th class="iscrizione-col-small">Dimensione (Mb)</th>
+                <th class="iscrizione-col-small">Nome</th>
+<!--                <th class="iscrizione-col-small">Uploader</th>-->
+                <th class="iscrizione-col-small">Descrizione</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
                     <td><?= $model->getData()->format('d/m/Y') ?></td>
                     <td><?= $model->getDimensione() ?></td>
                     <td><?= $model->getNome() ?></td>
-                    <td><?= $model->getUploader() ?></td>
+<!--                    <td><?= $model->getUploader() ?></td>-->
                     <td><?= $model->getDescrizione() ?></td>
                 </tr>
                 <?php

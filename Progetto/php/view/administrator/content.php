@@ -33,21 +33,21 @@ switch ($vd->getSottoPagina()) {
         
 
     <?php default: ?>
-        <h2 class="icon-title" id="h-home">My 3D world</h2> 
+        <h2 class="icon-title" id="h-home">The Cuttin' Edge</h2> 
         <p>
-            Welcome, <?= $user->getNome() ?>
+            Benvenuto, <?= $user->getNome() ?>
         </p>
         <p>
-            Select one of the following:
+            Seleziona uno dei seguenti campi:
         </p>
         <ul class="panel">
             <li><a href="administrator/anagrafica<?= $vd->scriviToken('?')?>" id="pnl-anagrafica">
-                    Personal Infos
+                    Info Personali
                 </a>
             </li>
-            <li><a href="administrator/modelli<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">3d models database</a></li>
-            <li><a href="administrator/utenti<?= $vd->scriviToken('?')?>" id="pnl-libretto">Users List</a></li>
-            <li><a href="administrator/el_modelli<?= $vd->scriviToken('?')?>" id="pnl-cerca">Search Models</a></li>
+            <li><a href="administrator/modelli<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">Database Coltelli</a></li>
+            <li><a href="administrator/utenti<?= $vd->scriviToken('?')?>" id="pnl-libretto">Lista Utenti</a></li>
+            <li><a href="administrator/el_modelli<?= $vd->scriviToken('?')?>" id="pnl-cerca">Cerca Coltello</a></li>
         </ul>
         <?php
         break;

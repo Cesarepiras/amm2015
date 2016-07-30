@@ -1,8 +1,8 @@
 <div class="input-form">
     <h2 class="icon-title" id="h-personali">Personal Infos</h2>
     <ul class="none">
-        <li><strong>Name:</strong> <?= $user->getNome() ?></li>
-        <li><strong>Surname:</strong> <?= $user->getCognome() ?></li>
+        <li><strong>Nome:</strong> <?= $user->getNome() ?></li>
+        <li><strong>Cognome:</strong> <?= $user->getCognome() ?></li>
     </ul>
 </div>
 
@@ -11,22 +11,22 @@
 
     <form method="post" action="administrator/anagrafica<?= '?'.$vd->scriviToken()?>">
         <input type="hidden" name="cmd" value="personalInfo"/>
-        <label for="via">Residence address :</label>
+        <label for="via">Indirizzo :</label>
         <input type="text" name="via" id="via" value="<?= $user->getVia() ?>"/>
         <br>
-        <label for="civico">Address number :</label>
+        <label for="civico">N. civico :</label>
         <input type="text" name="civico" id="civico" value="<?= $user->getNumeroCivico() ?>"/>
         <br/>
-        <label for="citta">City :</label>
+        <label for="citta">Città :</label>
         <input type="text" name="citta" id="citta" value="<?= $user->getCitta() ?>"/>
         <br/>
-        <label for="provincia">Disctrict :</label>
+        <label for="provincia">Provoncia</label>
         <input type="text" name="provincia" id="provincia" value="<?= $user->getProvincia() ?>"/>
         <br/>
-        <label for="cap">Zip code :</label>
+        <label for="cap">CAP :</label>
         <input type="text" name="cap" id="cap" value="<?= $user->getCap() ?>"/>
         <br/>
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Salva"/>
 
     </form>
 </div>
@@ -38,7 +38,7 @@
         <label for="email">Email :</label>
         <input type="text" name="email" id="email"value="<?= $user->getEmail() ?>"/>
         <br/>
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Salva"/>
     </form>
 </div>
 
@@ -46,12 +46,12 @@
     <h3>Password</h3>
     <form method="post" action="administrator/anagrafica<?= $vd->scriviToken('?')?>">
         <input type="hidden" name="cmd" value="password"/>
-        <label for="pass1">New Password :</label>
+        <label for="pass1">Nuova Password :</label>
         <input type="password" name="pass1" id="pass1"/>
         <br/>
-        <label for="pass2">Confirm password :</label>
+        <label for="pass2">Conferma password :</label>
         <input type="password" name="pass2" id="pass2"/>
         <br/>
-        <input type="submit" value="Change password"/>
+        <input type="submit" value="Cambia password"/>
     </form>
 </div>

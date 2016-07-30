@@ -1,7 +1,6 @@
 <?php
 
 include_once 'User.php';
-include_once 'Dipartimento.php';
 
 /**
  * User class

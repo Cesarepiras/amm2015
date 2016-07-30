@@ -1,12 +1,12 @@
-<h2  class="icon-title" id="help">Welcome to TTDM</h2>
+<h2  class="icon-title" id="help">Benvenuto in TCE</h2>
 <p>
-    From this page you can login into your account. Please inert your username and password.
+    In questa pagina puoi eseguire il login come Admin o user.
 </p>
 <p>
-    These are the three categories of users currently available (with examples of credentials):
+    Queste sono le categorie di utenti attualmente disponibili:
     <ul>
             <li>
-                <strong>Administrator</strong>: username: cesare, password: piras
+                <strong>Admin</strong>: username: cesare, password: piras
             </li>
             <li>
                 <strong>User</strong>: username: user, password: user

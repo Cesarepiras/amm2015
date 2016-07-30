@@ -4,76 +4,63 @@ switch ($vd->getSottoPagina()) {
     case 'anagrafica':
         ?>
         <p>
-            In this page you can edit your personal infos, as:
+            In questa pagina puoi modificare le tue informazioni,come:
         </p>
         <ul>
             <li>
-                Your <strong>generic infos</strong>.
+                Le tue <strong>Informazioni generali</strong>.
             </li>
             <li>
-                Your <strong>contacts</strong>.
+                I tuoi <strong>contatti</strong>.
             </li>
             <li>
-                Your <strong>password</strong>.
+                La tua <strong>password</strong>.
             </li>
         </ul>
         <?php break; ?>
 
     <?php case 'modelli': ?>
         <p>
-            In this page you can view and edit the 3d models' database. You can:
+            In questa pagina puoi visualizzare il database dei coltelli.
         </p>
-        <ul>
-            <li>
-                Upload a new 3D model by pressing the button <em>Upload new model</em>.
-            </li>
-            <li>
-                Edit an existing model by pressing the button <em>Edit Model</em>, 
-                (the <img  src="../images/edit-action.png" alt="icona modifica"> icon).
-            </li>
-            <li>
-                Delete an existing model by pressing the button <em>Delete Model</em>, 
-                (the <img  src="../images/delete-action.png" alt="icona elimina"> icon).
-            </li>
-        </ul>
         <?php break; ?>
 
     <?php case 'utenti': ?>
         <p>
-            In this page you can view the infos of all the users in our database, such as:
+            In questa pagina puoi vedere le principali informazioni dei nostri utenti, come:
         </p>
         <ul>
             <li>Username</li>
-            <li>City</li>
+            <li>Città</li>
             <li>Email</li>
         </ul>
         <?php break; ?>
     <?php case 'el_modelli': ?>
         <p>
-            In this page you can search for the models in our database. You can filter by:
+            In questa pagina puoi cercare i coltelli, filtrando per:
         </p>
         <ul>
             <li>Uploader</li>
-            <li>Name</li>
+            <li>Nome</li>
         </ul>
         <?php break; ?>
     <?php default:
         ?>
         <p>
-            Select one of the following sections of your 3D world:
+            Seleziona una dei seguenti campi:
         </p>
         <ol>
             <li>
-                <strong>Personal Infos</strong> to edit your account's infos, such as your email or password.
+                <strong>Info Personali</strong> per cambiare le tue info personali.
             </li>
             <li>
-                <strong>3d models database</strong> to view all the beautiful models on our database.
+                <strong>Database Coltelli</strong> per vedere il database dei nostri coltelli.
             </li>
             <li>
-                <strong>Users List</strong> to access the complete list of our users.
+                <strong>Lista Utenti</strong> per vedere la lista dei nostri utenti.
             </li>
             <li>
-                <strong>Search models</strong> to search for a model.
+                <strong>Cerca Coltelli</strong> per cercare un coltello.
             </li>
         </ol>
         <?php break; ?>

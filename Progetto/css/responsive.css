@@ -6,14 +6,14 @@ body{
 }
 
 #page{
-    background-color: #bebebe;
-    border-radius: 25px;
+    background-color: #F0F0F0;
+    border-radius: 30px;
 }
 
 #header, #footer{
-    background-color: #FF9933;
+    background-color: #3C3A37;
     color: white;
-    border-radius: 25px;
+    border-radius: 20px;
 
 }
 
@@ -467,10 +467,10 @@ tr.alt-row, tr.alt-row td{
     div#logo h1 {
         background-image: url('../images/logo.jpg');
         background-repeat: no-repeat;
-        background-position: center left;
+        background-size: contain;
         height: 100px;
         vertical-align: middle;
-        padding-left: 100px;
+        padding-left: 150px;
         margin-top: 0px;
         margin-bottom: 0px;
         line-height: 100px;

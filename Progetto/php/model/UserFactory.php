@@ -2,7 +2,6 @@
 
 include_once 'User.php';
 include_once 'Administrator.php';
-include_once 'Artist.php';
 include_once 'Utente.php';
 include_once 'Db.php';
 
@@ -77,47 +76,7 @@ class UserFactory {
             $mysqli->close();
             return $administrator;
         }
-        
-        //find an artist
-        $query = "select 
-               artist.username artist_username,
-               artist.password artist_password,
-               artist.nome artist_nome,
-               artist.cognome artist_cognome,
-               artist.email artist_email,
-               artist.citta artist_citta,
-               artist.id artist_id,
-               artist.eta artist_eta,
-               artist.caricamenti artist_caricamenti,
-               artist.descrizione_personale artist_descrizione_personale
                
-               from artist 
-               
-               where artist.username = ? and artist.password = ?";
-
-        $stmt = $mysqli->stmt_init();
-        $stmt->prepare($query);
-        if (!$stmt) {
-            error_log("[loadUser] impossibile" .
-                    " inizializzare il prepared statement");
-            $mysqli->close();
-            return null;
-        }
-
-        if (!$stmt->bind_param('ss', $username, $password)) {
-            error_log("[loadUser] impossibile" .
-                    " effettuare il binding in input");
-            $mysqli->close();
-            return null;
-        }
-		
-        $artist = self::caricaArtistDaStmt($stmt);
-        if (isset($artist)) {
-            // found an artist
-            $mysqli->close();
-            return $artist;
-        }
-        
         //find user
         $query = "select 
                user.username user_username,
@@ -204,13 +163,7 @@ class UserFactory {
 							user.email user_email,
 							user.citta user_citta 
 
-							from user 
-					union 
-					select  artist.username artist_username,
-							artist.email artist_email,
-							artist.citta artist_citta  
-
-							from artist";
+							from user ";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[getListaAdministrator] impossibile inizializzare il database");
@@ -281,44 +234,6 @@ class UserFactory {
                 }
 
                 $toRet =  self::caricaAdministratorDaStmt($stmt);
-                $mysqli->close();
-                return $toRet;
-                break;
-                
-            case User::Artist: 
-                $query = "select 
-               artist.username artist_username,
-               artist.password artist_password,
-               artist.nome artist_nome,
-               artist.cognome artist_cognome,
-               artist.email artist_email,
-               artist.citta artist_citta,
-               artist.id artist_id,
-               artist.eta artist_eta,
-               artist.caricamenti artist_caricamenti,
-               artist.descrizione_personale artist_descrizione_personale
-               
-               from artist 
-               
-               where artist.id = ?";
-
-                $stmt = $mysqli->stmt_init();
-                $stmt->prepare($query);
-                if (!$stmt) {
-                    error_log("[cercaUtentePerId] impossibile" .
-                            " inizializzare il prepared statement");
-                    $mysqli->close();
-                    return null;
-                }
-
-                if (!$stmt->bind_param('i', $intval)) {
-                    error_log("[loadUser] impossibile" .
-                            " effettuare il binding in input");
-                    $mysqli->close();
-                    return null;
-                }
-
-                $toRet =  self::caricaArtistDaStmt($stmt);
                 $mysqli->close();
                 return $toRet;
                 break;
@@ -400,24 +315,6 @@ class UserFactory {
 
         return $utente;
     }
-    
-    public function creaArtistaDaArray($row) {
-        $artist = new Artist();
-        $artist->setUsername($row['artist_username']);
-        $artist->setPassword($row['artist_password']);
-        $artist->setNome($row['artist_nome']);
-        $artist->setCognome($row['artist_cognome']);
-        $artist->setEmail($row['artist_email']);
-        $artist->setCitta($row['artist_citta']);
-        $artist->setId($row['artist_id']);
-        
-        $artist->setEta($row['artist_citta']);
-        $artist->setCaricamenti($row['artist_caricamenti']);
-        $artist->setDescrizionePersonale($row['artist_descrizione_personale']);
-        $artist->setRuolo(User::Artist);
-
-        return $artist;
-    }
 
     public function salva(User $user) {
         $mysqli = Db::getInstance()->connectDb();
@@ -432,9 +329,6 @@ class UserFactory {
         switch ($user->getRuolo()) {
             case User::Administrator:
                 $count = $this->salvaAdministrator($user, $stmt); 
-                break;
-            case User::Artist:
-                $count = $this->salvaArtist($user, $stmt);
                 break;
             case User::Utente:
                 $count = $this->salvaUtente($user, $stmt);
@@ -491,51 +385,7 @@ class UserFactory {
 
         return $stmt->affected_rows;
     }
-    
-    private function salvaArtist(Artist $a, mysqli_stmt $stmt) {
-        $query = " update artist set 
-                    password = ?,
-                    nome = ?,
-                    cognome = ?,
-                    email = ?,
-                    citta = ?,
-                    eta = ?,
-                    caricamenti = ?,
-                    descrizione_personale = ?
-                    
-                    where artist.id = ?
-                    ";
-        $stmt->prepare($query);
-        if (!$stmt) {
-            error_log("[salvaArtist] impossibile" .
-                    " inizializzare il prepared statement");
-            return 0;
-        }
-
-        if (!$stmt->bind_param('sssssissi', 
-                $a->getPassword(), 
-                $a->getNome(), 
-                $a->getCognome(), 
-                $a->getEmail(), 
-                $a->getCitta(),
-                $a->getEta(),
-                $a->getCaricamenti(), 
-                $a->getDescrizionePersonale(),  
-                $a->getId())) {
-            error_log("[salvaArtist] impossibile" .
-                    " effettuare il binding in input");
-            return 0;
-        }
-
-        if (!$stmt->execute()) {
-            error_log("[caricaIscritti] impossibile" .
-                    " eseguire lo statement");
-            return 0;
-        }
-
-        return $stmt->affected_rows;
-    }
-    
+        
     private function salvaUtente(Utente $u, mysqli_stmt $stmt) {
         $query = " update user set 
                     password = ?,
@@ -639,41 +489,6 @@ class UserFactory {
         return self::creaUserDaArray($row);
     }
     
-    private function caricaArtistDaStmt(mysqli_stmt $stmt) {
-
-        if (!$stmt->execute()) {
-            error_log("[caricaArtistDaStmt] impossibile" .
-                    " eseguire lo statement");
-            return null;
-        }
-
-        $row = array();
-        $bind = $stmt->bind_result( 
-                $row['artist_username'],
-                $row['artist_password'],
-                $row['artist_nome'], 
-                $row['artist_cognome'], 
-                $row['artist_email'], 
-                $row['artist_citta'],
-                $row['artist_id'],
-                $row['artist_eta'],
-                $row['artist_caricamenti'],
-                $row['artist_descrizione_personale']);
-        if (!$bind) {
-            error_log("[caricaArtistDaStmt] impossibile" .
-                    " effettuare il binding in output");
-            return null;
-        }
-
-        if (!$stmt->fetch()) {
-            return null;
-        }
-
-        $stmt->close();
-
-        return self::creaArtistaDaArray($row);
     }
-
-}
 
 ?>

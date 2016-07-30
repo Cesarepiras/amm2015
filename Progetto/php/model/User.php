@@ -6,7 +6,6 @@
 class User {
     
     const Administrator = 3;
-    const Artist = 4;
     const Utente = 5;
     
     
@@ -80,7 +79,6 @@ class User {
     public function setRuolo($ruolo) {
         switch ($ruolo) {
             case self::Administrator:
-            case self::Artist:
             case self::Utente:
                 $this->ruolo = $ruolo;
                 return true;

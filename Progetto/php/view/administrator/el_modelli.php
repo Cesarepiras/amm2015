@@ -10,28 +10,28 @@
         <label for="uploader">Uploader</label>
         <input name="uploader" id="uploader" type="text"/>
         <br/>
-        <label for="nome">Name</label>
+        <label for="nome">Nome</label>
         <input name="nome" id="nome" type="text"/>
         <br/>
-        <button id="filtra" type="submit" name="cmd" value="e_cerca">Find models</button>
+        <button id="filtra" type="submit" name="cmd" value="e_cerca">Cerca coltelli</button>
     </form>
 </div>
 
 
 
-<h3>Found models</h3>
+<h3>Coltelli trovati</h3>
 
-<p id="nessuno">No models found</p>
+<p id="nessuno">Nessun coltello trovato</p>
 
 <table id="tabella_modelli">
     <thead>
         <tr>
             <th>Id</th>
             <th>Data</th>
-            <th>Dimension (Mb)</th>
-            <th>Name</th>
+            <th>Dimensione (Mb)</th>
+            <th>Nome</th>
             <th>Uploader</th>
-            <th>Description</th>
+            <th>Descrizione</th>
         </tr>
     </thead>
     <tbody>

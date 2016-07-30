@@ -78,7 +78,7 @@ class BaseController {
      */
     protected function showLoginPage($vd) {
         // show login page
-        $vd->setTitolo("TTDM - login");
+        $vd->setTitolo("TCE - login");
         $vd->setMenuFile(basename(__DIR__) . '/../view/login/menu.php');
         $vd->setLogoFile(basename(__DIR__) . '/../view/login/logo.php');
         $vd->setLeftBarFile(basename(__DIR__) . '/../view/login/leftBar.php');
@@ -88,27 +88,17 @@ class BaseController {
 	
 	 protected function showHomeAdministrator($vd) {
         // show admins' home
-        $vd->setTitolo("TTDM - Administrator page");
+        $vd->setTitolo("TCE - Admin page");
         $vd->setMenuFile(basename(__DIR__) . '/../view/administrator/menu.php');
         $vd->setLogoFile(basename(__DIR__) . '/../view/administrator/logo.php');
         $vd->setLeftBarFile(basename(__DIR__) . '/../view/administrator/leftBar.php');
         $vd->setRightBarFile(basename(__DIR__) . '/../view/administrator/rightBar.php');
         $vd->setContentFile(basename(__DIR__) . '/../view/administrator/content.php');
     }
-    
-    protected function showHomeArtist($vd) {
-        // show artists' home
-        $vd->setTitolo("TTDM - Artist page");
-        $vd->setMenuFile(basename(__DIR__) . '/../view/artist/menu.php');
-        $vd->setLogoFile(basename(__DIR__) . '/../view/artist/logo.php');
-        $vd->setLeftBarFile(basename(__DIR__) . '/../view/artist/leftBar.php');
-        $vd->setRightBarFile(basename(__DIR__) . '/../view/artist/rightBar.php');
-        $vd->setContentFile(basename(__DIR__) . '/../view/artist/content.php');
-    }
-    
+      
     protected function showHomeUser($vd) {
         // show users' home
-        $vd->setTitolo("TTDM - User page");
+        $vd->setTitolo("TCE - User page");
         $vd->setMenuFile(basename(__DIR__) . '/../view/user/menu.php');
         $vd->setLogoFile(basename(__DIR__) . '/../view/user/logo.php');
         $vd->setLeftBarFile(basename(__DIR__) . '/../view/user/leftBar.php');
@@ -125,10 +115,6 @@ class BaseController {
         switch ($user->getRuolo()) {
             case User::Administrator:
                 $this->showHomeAdministrator($vd);
-                break;
-                
-            case User::Artist:
-                $this->showHomeArtist($vd);
                 break;
                 
             case User::Utente:
