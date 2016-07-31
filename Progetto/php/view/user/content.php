@@ -18,6 +18,10 @@ switch ($vd->getSottoPagina()) {
         include 'modelli_crea.php';
         break;
     
+    case 'modelli_visualizza':
+        include 'modelli_visualizza.php';
+        break;
+    
     case 'utenti':
         include 'utenti.php';
         break;
@@ -47,7 +51,7 @@ switch ($vd->getSottoPagina()) {
             </li>
             <li><a href="user/modelli<?= $vd->scriviToken('?')?>" id="pnl-iscrizione">Database Coltelli</a></li>
             <li><a href="user/utenti<?= $vd->scriviToken('?')?>" id="pnl-libretto">Lista Utenti</a></li>
-            <li><a href="user/el_modelli<?= $vd->scriviToken('?')?>" id="pnl-cerca">Cerca Coltelli</a></li>
+            <li><a href="user/el_modelli<?= $vd->scriviToken('?')?>" id="pnl-cerca">Cerca Coltello</a></li>
         </ul>
         <?php
         break;

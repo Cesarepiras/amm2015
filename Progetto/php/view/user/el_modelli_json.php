@@ -8,9 +8,7 @@ foreach($models_f as $model){ //echo " (el_modelli_json foreach) ";
     $element = array();
     $element['id'] = $model->getId();
     $element['data'] = $model->getData()->format('Y-m-d');
-    $element['dimensione'] = $model->getDimensione();
     $element['nome'] = $model->getNome();
-    $element['uploader'] = $model->getUploader();
     $element['descrizione'] = $model->getDescrizione();
     $json['models'][] = $element;
     

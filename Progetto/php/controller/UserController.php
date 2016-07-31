@@ -75,6 +75,17 @@ class UserController extends BaseController {
                         }
 
                         break;
+                    
+                    case 'modelli_visualizza':
+                        $msg = array();
+                        $models = ModelFactory::instance()->getModelsPerAdministrator($user);
+                        $mod_model = $this->getModello($request, $msg);
+                        if (!isset($mod_model)) {
+                            $vd->setSottoPagina('modelli');
+                        } else {
+                            $vd->setSottoPagina('modelli_visualizza');
+                        }
+                        break;
 
                     // Users list
                     case 'utenti':
@@ -89,16 +100,16 @@ class UserController extends BaseController {
                         $vd->addScript("../js/elencoModelliUser.js");
                         break;
 
-                    // Manage the Ajax request for models filtering
+                   // Manage the Ajax request for filtering
                     case 'filtra_modelli':
-                       $vd->toggleJson();
+                        $vd->toggleJson();
                         $vd->setSottoPagina('el_modelli_json');
                         $errori = array();
-
-                        if (isset($request['uploader'])) {
-                            $uploader = $request['uploader'];
+                        
+                        if (isset($request['descrizione'])) {
+                            $descrizione = $request['descrizione'];
                         }else{
-                            $uploader = null;
+                            $descrizione = null;
                         }
 
                         if (isset($request['nome'])) {
@@ -106,8 +117,8 @@ class UserController extends BaseController {
                         }else{
                             $nome = null;
                         }
-    
-                        $models_f = ModelFactory::instance()->ricercaModelli($uploader, $nome);
+     
+                        $models_f = ModelFactory::instance()->ricercaModelli($descrizione, $nome);
 
                         break;
 
@@ -320,7 +331,7 @@ class UserController extends BaseController {
             $model_id = filter_var($request['modello'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
             $model = ModelFactory::instance()->cercaModelPerId($model_id);
             if ($model == null) {
-                $msg[] = "The selected model is incorrect</li>";
+                $msg[] = "The selected knife is incorrect</li>";
             }
             return $model;
         } else {

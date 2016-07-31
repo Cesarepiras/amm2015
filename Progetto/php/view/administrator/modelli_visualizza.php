@@ -1,12 +1,20 @@
 <div>
-    <h3>
+    <h3>Nome del coltello.</h3>
+    <h4>
         <?= $mod_model->getNome() ?>
-    </h3>
+    </h4>
+       
     <p>
-        <?= $mod_model->getData()->format('d-m-Y') ?>
+         <h3>
+            Data inserimento:
+        </h3>
+        <h4><?= $mod_model->getData()->format('d-m-Y') ?></h4>
     </p>
     <p>
-        <?= $mod_model->getDescrizione() ?>
+        <h3>
+            Descrizione:
+        </h3>
+        <h5><?= $mod_model->getDescrizione() ?></h5>
     </p>
 
 </div>

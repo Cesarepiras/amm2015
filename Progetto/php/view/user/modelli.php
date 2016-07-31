@@ -11,8 +11,7 @@
                 <th class="iscrizione-col-small">ID</th>
                 <th class="iscrizione-col-small">Data</th>
                 <th class="iscrizione-col-small">Nome</th>
-                <th class="iscrizione-col-small">Descrizione</th>
-                <th class="iscrizione-col-small">Foto</th>
+                <th class="iscrizione-col-small">Info</th>
             </tr>
         </thead>
         <tbody>
@@ -24,8 +23,11 @@
                     <td><?= $model->getId() ?></td>
                     <td><?= $model->getData()->format('d/m/Y') ?></td>
                     <td><?= $model->getNome() ?></td>
-                    <td><?= $model->getDescrizione() ?></td>
-                    <td>Apri</td>
+                    <td>
+                        <a href="administrator/modelli_visualizza?modello=<?= $model->getId() ?><?= $vd->scriviToken('&') ?>" title="View Knife">
+                            <img  src="../images/info.png" alt="Visualizza">
+                        </a>
+                    </td>
                 </tr>
                 <?php
                 $i++;
