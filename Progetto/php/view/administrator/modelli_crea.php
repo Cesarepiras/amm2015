@@ -5,14 +5,11 @@
         <label for="data">Data</label>
         <input type="text" name="data" id="data"/>
         <br/>
-        <label for="posti">Dimensione</label>
-        <input type="text" name="posti" id="posti"/>
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome"/>
         <br/>
-        <label for="name">Nome</label>
-        <input type="text" name="name" id="name"/>
-        <br/>
-        <label for="description">Descrizione</label>
-        <input type="text" name="description" id="description"/>
+        <label for="descrizione">Descrizione</label>
+        <input type="text" name="descrizione" id="descrizione"/>
         <br/>
         <div class="btn-group">
             <button type="submit" name="cmd" value="a_nuovo">Salva</button>

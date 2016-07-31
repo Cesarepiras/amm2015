@@ -5,11 +5,7 @@
     </div>
 </div>
 <div class="input-form">
-    <h3>Filter</h3>
-    <form method="post" action="user/el_modelli<?= $vd->scriviToken('?') ?>">		
-        <label for="uploader">Uploader</label>
-        <input name="uploader" id="uploader" type="text"/>
-        <br/>
+    <h3>Filtra</h3>
         <label for="nome">Nome</label>
         <input name="nome" id="nome" type="text"/>
         <br/>

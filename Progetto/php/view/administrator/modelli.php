@@ -1,3 +1,4 @@
+
 <h2 class="icon-title" id="h-iscrizione">Database Coltelli</h2>
 <h4>Informazioni Admin</h1>
 <ul class="none">
@@ -11,12 +12,11 @@
             <tr>
                 <th class="iscrizione-col-small">ID</th>
                 <th class="iscrizione-col-small">Data</th>
-<!--                <th class="iscrizione-col-small">Dimension (Mb)</th>-->
                 <th class="iscrizione-col-small">Nome</th>
-<!--                <th class="iscrizione-col-small">Uploader</th>-->
                 <th class="iscrizione-col-small">Descrizione</th>
                 <th class="iscrizione-col-small">Modifica</th>
                 <th class="iscrizione-col-small">Elimina</th>
+                <th class="iscrizione-col-small">Foto</th>
             </tr>
         </thead>
         <tbody>
@@ -27,9 +27,7 @@
                 <tr <?= $i % 2 == 0 ? 'class="alt-row"' : '' ?>>
                     <td><?= $model->getId() ?></td>
                     <td><?= $model->getData()->format('d/m/Y') ?></td>
-<!--                    <td><?= $model->getDimensione() ?></td>-->
                     <td><?= $model->getNome() ?></td>
-<!--                    <td><?= $model->getUploader() ?></td>-->
                     <td><?= $model->getDescrizione() ?></td>
                     <td>
                         <a href="administrator/modelli_modifica?modello=<?= $model->getId() ?><?= $vd->scriviToken('&') ?>" title="Edit Knife">
@@ -39,6 +37,11 @@
                     <td>
                         <a href="administrator/modelli?cmd=a_cancella&modello=<?= $model->getId() ?><?= $vd->scriviToken('&') ?>" title="Delete Knfe">
                             <img  src="../images/delete-action.png" alt="Elimina">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="administrator/modelli?cmd=a_visualizza&modello=<?= $model->getId() ?><?= $vd->scriviToken('&') ?>" title="View Knife">
+                            <img  src="../images/info.png" alt="Visualizza">
                         </a>
                     </td>
                 </tr>

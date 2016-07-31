@@ -37,12 +37,8 @@ switch ($vd->getSottoPagina()) {
         <?php break; ?>
     <?php case 'el_modelli': ?>
         <p>
-            In questa pagina puoi cercare i coltelli, filtrando per:
+            In questa pagina puoi cercare i coltelli, filtrando per Nome:
         </p>
-        <ul>
-            <li>Uploader</li>
-            <li>Nome</li>
-        </ul>
         <?php break; ?>
     <?php default:
         ?>

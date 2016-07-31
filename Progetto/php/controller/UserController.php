@@ -47,7 +47,6 @@ class UserController extends BaseController {
                         $vd->setSottoPagina('anagrafica');
                         break;
 
-                    // 3D models database
                     case 'modelli':
                         $models = ModelFactory::instance()->getModelsPerUser($user);
                         $vd->setSottoPagina('modelli');
@@ -79,11 +78,10 @@ class UserController extends BaseController {
 
                     // Users list
                     case 'utenti':
-						$utenti = UserFactory::instance()->getListaUsers();
+                        $utenti = UserFactory::instance()->getListaUsers();
                         $vd->setSottoPagina('utenti');
                         break;
 
-                    // Search 3D models
                     case 'el_modelli':
                         $models = ModelFactory::instance()->getModelsPerUser($user);
                         $vd->setSottoPagina('el_modelli');

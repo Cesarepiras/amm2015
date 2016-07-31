@@ -172,7 +172,7 @@ class AdministratorController extends BaseController {
                             if (isset($intVal)) {
                                 $mod_model = $this->cercaModelloPerId($intVal, $models);
                                 $this->updateModello($mod_model, $request, $msg);
-                                if (count($msg) == 0 && ModelFactory::instance()->salva($mod_model) != 1) {
+                                if (count($msg) > 0 && ModelFactory::instance()->salva($mod_model) != 1) {
                                     $msg[] = '<li>Sorry! I wasn\'t able to save the model</li>';
                                 }
                                 $this->creaFeedbackUtente($msg, $vd, "Model saved");
@@ -204,13 +204,12 @@ class AdministratorController extends BaseController {
                         $msg = array();
                         $nuovo = new Model();
                         $nuovo->setId(-1);
-                        $nuovo->setUploader($user->getUsername());
                         $this->updateModello($nuovo, $request, $msg);
                         $this->creaFeedbackUtente($msg, $vd, "Model created");
-                        if (count($msg) == 0) {
+                        if (count($msg) > 0) {
                             $vd->setSottoPagina('modelli');
                             if (ModelFactory::instance()->nuovo($nuovo) != 1) {
-                                $msg[] = '<li>Sorry! I wasn\'t able to create the model</li>';
+                                $msg[] = '<li>Sorry! I wasn\'t able to create the knife</li>';
                             }
                         }
                         $models = ModelFactory::instance()->getModelsPerAdministrator($user);
@@ -240,6 +239,19 @@ class AdministratorController extends BaseController {
                     case 'e_cerca':
                         $msg = array();
                         $this->creaFeedbackUtente($msg, $vd, "Lo implementiamo con il db ;)");
+                        $this->showHomeUtente($vd);
+                        break;
+                    case 'a_visualizza':
+                        if (isset($request['modello'])) {
+                            $intVal = filter_var($request['modello'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
+                            if (isset($intVal)) {
+                                $mod_model = ModelFactory::instance()->cercaModelPerId($intVal);
+                                if ($mod_model != null) {
+                                    
+                                }
+                            }
+                        }
+                        $models = ModelFactory::instance()->getModelPerAdministrator($user);
                         $this->showHomeUtente($vd);
                         break;
 
@@ -276,18 +288,13 @@ class AdministratorController extends BaseController {
                 $msg[] = "<li>The date is incorrect. Please insert a date in the format day/month/year</li>";
             }
         }
-        if (isset($request['posti'])) {
-            if (!$mod_model->setDimensione($request['posti'])) {
-                $msg[] = "<li>The dimension is incorrect</li>";
-            }
-        }
-        if (isset($request['name'])) {
-            if (!$mod_model->setNome($request['name'])) {
+        if (isset($request['nome'])) {
+            if (!$mod_model->setNome($request['nome'])) {
                 $msg[] = "<li>The name is incorrect</li>";
             }
         }
-        if (isset($request['description'])) {
-            if (!$mod_model->setDescrizione($request['description'])) {
+        if (isset($request['descrizione'])) {
+            if (!$mod_model->setDescrizione($request['descrizione'])) {
                 $msg[] = "<li>The description is incorrect</li>";
             }
         }

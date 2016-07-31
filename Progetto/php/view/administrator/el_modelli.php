@@ -1,15 +1,11 @@
-<h2 class="icon-title" id="h-cerca">Search models</h2>
+<h2 class="icon-title" id="h-cerca">Cerca coltelli</h2>
 <div class="error">
     <div>
         <ul><li>Testo</li></ul>
     </div>
 </div>
 <div class="input-form">
-    <h3>Filter</h3>
-    <form method="post" action="administrator/el_modelli<?= $vd->scriviToken('?') ?>">		
-        <label for="uploader">Uploader</label>
-        <input name="uploader" id="uploader" type="text"/>
-        <br/>
+    <h3>Filtra</h3>
         <label for="nome">Nome</label>
         <input name="nome" id="nome" type="text"/>
         <br/>
@@ -28,9 +24,7 @@
         <tr>
             <th>Id</th>
             <th>Data</th>
-            <th>Dimensione (Mb)</th>
             <th>Nome</th>
-            <th>Uploader</th>
             <th>Descrizione</th>
         </tr>
     </thead>
@@ -39,9 +33,7 @@
         <tr >
             <td> id </td>
             <td> data </td>
-            <td> dimensione </td>
             <td> nome </td>
-            <td> uploader </td>
             <td> descrizione </td>
 
         </tr>

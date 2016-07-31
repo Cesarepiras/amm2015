@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Model class
  *
@@ -7,23 +8,9 @@
 class Model {
 
     private $data;
-    
     private $nome;
-    
-    private $dimensione;
-    
     private $id;
-	
-	private $uploader;
-	
-	private $descrizione;
-    
-    /**
-     * Constructor
-     */
-    public function __construct() {
-        $this->iscritti = array();
-    }
+    private $descrizione;
 
     public function getId() {
         return $this->id;
@@ -47,48 +34,24 @@ class Model {
         return true;
     }
 
-    public function getDimensione() {
-        return $this->dimensione;
-    }
-    
-    public function setDimensione($dimensione) {
-        $intVal = filter_var($dimensione, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
-        if (!isset($intVal)) {
-            return false;
-        }
-        if ($intVal < count($this->iscritti)) {
-            return false;
-        }
-        $this->dimensione = $intVal;
-        return true;
-    }
-    
     public function getNome() {
         return $this->nome;
     }
-    
+
     public function setNome($nome) {
-		$this->nome=$nome;
-		return true;
-	}
-	
-	public function getUploader() {
-        return $this->uploader;
+        $this->nome = $nome;
+        return true;
     }
-    
-    public function setUploader($uploader) {
-		$this->uploader=$uploader;
-		return true;
-	}
-	
-	public function getDescrizione() {
+
+    public function getDescrizione() {
         return $this->descrizione;
     }
-    
+
     public function setDescrizione($descrizione) {
-		$this->descrizione=$descrizione;
-		return true;
-	}
+        $this->descrizione = $descrizione;
+        return true;
+    }
+
 }
 
 ?>

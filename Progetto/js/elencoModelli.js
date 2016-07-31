@@ -7,11 +7,9 @@ $(document).ready(function () {
     $('#filtra').click(function(e){
         // prevent submit
         e.preventDefault(); 
-        var _uploader = $("#uploader").val();
         var _nome = $("#nome").val();
         
         var par = {
-            uploader: _uploader,
             nome: _nome
         };
         $.ajax({

@@ -14,43 +14,41 @@ include_once 'Utente.php';
 class ModelFactory {
 
     private static $singleton;
-    
-    private function __constructor(){
+
+    private function __constructor() {
+        
     }
-    
-    
+
     /**
      * Returns a singleton to create models
      * @return \ModelFactory
      */
-    public static function instance(){
-        if(!isset(self::$singleton)){
+    public static function instance() {
+        if (!isset(self::$singleton)) {
             self::$singleton = new ModelFactory();
         }
-        
+
         return self::$singleton;
     }
-    
-    public function cercaModelPerId($modelid){
+
+    public function cercaModelPerId($modelid) {
         $models = array();
         $query = "select 
-               models.id models_id,
-               models.data models_data,
-               models.dimensione models_dimensione,
-               models.nome models_nome,
-               models.uploader models_uploader,
-               models.descrizione models_descrizione
+               coltello.id coltello_id,
+               coltello.data coltello_data,
+               coltello.nome coltello_nome,
+               coltello.descrizione coltello_descrizione
                
-               from models
+               from coltello
                
-               where models.id = ?";
+               where coltello.id = ?";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[cercaModelPerId] impossibile inizializzare il database");
             $mysqli->close();
             return $models;
         }
-        
+
         $stmt = $mysqli->stmt_init();
         $stmt->prepare($query);
         if (!$stmt) {
@@ -60,7 +58,7 @@ class ModelFactory {
             return $models;
         }
 
-        
+
         if (!$stmt->bind_param('i', $modelid)) {
             error_log("[cercaModelPerId] impossibile" .
                     " effettuare il binding in input");
@@ -68,36 +66,34 @@ class ModelFactory {
             return $models;
         }
 
-        $models =  self::caricaModelliDaStmt($stmt);
-        
-        if(count($models > 0)){
+        $models = self::caricaModelliDaStmt($stmt);
+
+        if (count($models > 0)) {
             $mysqli->close();
             return $models[0];
-        }else{
+        } else {
             $mysqli->close();
             return null;
         }
     }
-       
+
     public function &getModelsPerAdministrator(Administrator $admin) {
-       $models = array();
-        
+        $models = array();
+
         $query = "select 
-               models.id models_id,
-               models.data models_data,
-               models.dimensione models_dimensione,
-               models.nome models_nome,
-               models.uploader models_uploader,
-               models.descrizione models_descrizione
+               coltello.id coltello_id,
+               coltello.data coltello_data,
+               coltello.nome coltello_nome,
+               coltello.descrizione coltello_descrizione
                
-               from models";
+               from coltello";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[getModelsPerAdministrator] impossibile inizializzare il database");
             $mysqli->close();
             return $models;
         }
-        
+
         $stmt = $mysqli->stmt_init();
         $stmt->prepare($query);
         if (!$stmt) {
@@ -107,31 +103,56 @@ class ModelFactory {
             return null;
         }
 
-        $models =  self::caricaModelliDaStmt($stmt);
-        
+        $models = self::caricaModelliDaStmt($stmt);
+
         $mysqli->close();
         return $models;
     }
     
+    
+    public function &getModelPerAdministrator(Administrator $admin) {
+        $models = array();
+
+        $query = "select coltello.id coltello_id from coltello";
+        $mysqli = Db::getInstance()->connectDb();
+        if (!isset($mysqli)) {
+            error_log("[getModelsPerAdministrator] impossibile inizializzare il database");
+            $mysqli->close();
+            return $models;
+        }
+
+        $stmt = $mysqli->stmt_init();
+        $stmt->prepare($query);
+        if (!$stmt) {
+            error_log("[getModelsPerAdministrator] impossibile" .
+                    " inizializzare il prepared statement");
+            $mysqli->close();
+            return null;
+        }
+
+        $models = self::caricaModelliDaStmt($stmt);
+
+        $mysqli->close();
+        return $models[0];
+    }
+
     public function &getModelsPerUser(Utente $utente) {
-       $models = array();
-        
+        $models = array();
+
         $query = "select 
-               models.id models_id,
-               models.data models_data,
-               models.dimensione models_dimensione,
-               models.nome models_nome,
-               models.uploader models_uploader,
-               models.descrizione models_descrizione
+               coltello.id coltello_id,
+               coltello.data coltello_data,
+               coltello.nome coltello_nome,
+               coltello.descrizione coltello_descrizione
                
-               from models";
+               from coltello";
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[getModelsPerUsers] impossibile inizializzare il database");
             $mysqli->close();
             return $models;
         }
-        
+
         $stmt = $mysqli->stmt_init();
         $stmt->prepare($query);
         if (!$stmt) {
@@ -141,15 +162,15 @@ class ModelFactory {
             return null;
         }
 
-        $models =  self::caricaModelliDaStmt($stmt);
-        
+        $models = self::caricaModelliDaStmt($stmt);
+
         $mysqli->close();
         return $models;
     }
-    
-    private function &caricaModelliDaStmt(mysqli_stmt $stmt){
+
+    private function &caricaModelliDaStmt(mysqli_stmt $stmt) {
         $models = array();
-         if (!$stmt->execute()) {
+        if (!$stmt->execute()) {
             error_log("[caricaModelliDaStmt] impossibile" .
                     " eseguire lo statement");
             $returnNull = null;
@@ -158,12 +179,7 @@ class ModelFactory {
 
         $row = array();
         $bind = $stmt->bind_result(
-                $row['models_id'],
-                $row['models_data'],
-                $row['models_dimensione'],
-                $row['models_nome'],
-                $row['models_uploader'],
-                $row['models_descrizione']);
+                $row['coltello_id'], $row['coltello_data'], $row['coltello_nome'], $row['coltello_descrizione']);
         if (!$bind) {
             error_log("[caricaInsegnamentoDaStmt] impossibile" .
                     " effettuare il binding in output");
@@ -173,49 +189,44 @@ class ModelFactory {
         while ($stmt->fetch()) {
             $models[] = self::creaDaArray($row);
         }
-        
+
         $stmt->close();
-        
+
         return $models;
     }
 
-    public function creaDaArray($row){
+    public function creaDaArray($row) {
         $model = new Model();
-        $model->setId($row['models_id']);
-        $model->setDimensione($row['models_dimensione']);
-        $model->setNome($row['models_nome']);
-        $model->setData(new DateTime($row['models_data']));
-        $model->setUploader($row['models_uploader']);
-        $model->setDescrizione($row['models_descrizione']);
+        $model->setId($row['coltello_id']);
+        $model->setNome($row['coltello_nome']);
+        $model->setData(new DateTime($row['coltello_data']));
+        $model->setDescrizione($row['coltello_descrizione']);
         return $model;
     }
-    
-    public function salva(Model $model){
-         $query = "update models set 
-					id = ?,
+
+    public function salva(Model $model) {
+        $query = "update coltello set 
+                    id = ?,
                     data = ?,
-                    dimensione = ?,
                     nome = ?,
-                    uploader = ?,
                     descrizione = ?
                     
-                    where models.id = ?";
-        return $this->modificaDB($model, $query);
-        
-    }
-    
-    public function nuovo(Model $model){
-        $query = "insert into models (id, data, dimensione, nome, uploader, descrizione)
-                  values (?, ?, ?, ?, ?, ?)";
+                    where coltello.id = ?";
         return $this->modificaDB($model, $query);
     }
-    
-    public function cancella(Model $model){
-        $query = "delete from models where id= ? and data = ? and dimensione = ? and nome = ? and uploader = ? and descrizione = ?";
+
+    public function nuovo(Model $model) {
+        $query = "insert into coltello (id, data, nome, descrizione)
+                  values (?, ?, ?, ?)";
         return $this->modificaDB($model, $query);
     }
-    
-    private function modificaDB(Model $model, $query){
+
+    public function cancella(Model $model) {
+        $query = "delete from coltello where id= ?";
+        return $this->modificaDB($model, $query);
+    }
+
+    private function modificaDB(Model $model, $query) {
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[salva] impossibile inizializzare il database");
@@ -223,7 +234,7 @@ class ModelFactory {
         }
 
         $stmt = $mysqli->stmt_init();
-       
+
         $stmt->prepare($query);
         if (!$stmt) {
             error_log("[modificaDB] impossibile" .
@@ -231,90 +242,73 @@ class ModelFactory {
             $mysqli->close();
             return 0;
         }
-		if(strlen(strstr($query, 'update')) <=0){ 
-			if (!$stmt->bind_param('isisss', 
-					$model->getId(),
-					$model->getData()->format('Y-m-d'),
-					$model->getDimensione(),
-					$model->getNome(),
-					$model->getUploader(),
-					$model->getDescrizione())) {
-				error_log("[modificaDB] impossibile" .
-						" effettuare il binding in input");
-				$mysqli->close();
-				return 0;
-			}
-		}
-		else{ 
-			if (!$stmt->bind_param('isisiss', 
-					$model->getId(),
-					$model->getData()->format('Y-m-d'),
-					$model->getDimensione(),
-					$model->getNome(),
-					$model->getUploader(),
-					$model->getDescrizione(),
-					$model->getId())) {
-				error_log("[modificaDB] impossibile" .
-						" effettuare il binding in input");
-				$mysqli->close();
-				return 0;
-			}
-		}
-		
-		$mysqli->autocommit(false);
+
+        if (strstr($query, 'delete')) {
+            if (!$stmt->bind_param('i', $model->getId())) {
+                error_log("[modificaDB] impossibile" .
+                        " effettuare il binding in input");
+                $mysqli->close();
+                return 0;
+            }
+        } else {
+            if (!$stmt->bind_param('isss', $model->getId(), $model->getData()->format('Y-m-d'), $model->getNome(), $model->getDescrizione())) {
+                error_log("[modificaDB] impossibile" .
+                        " effettuare il binding in input");
+                $mysqli->close();
+                return 0;
+            }
+        }
+
+        $mysqli->autocommit(false);
 
         if (!$stmt->execute()) {
+            die($stmt->error);
             error_log("[modificaDB] impossibile" .
                     " eseguire lo statement");
             $mysqli->rollback();
             $mysqli->close();
             return 0;
         }
-		
-		$mysqli->commit();
+
+        $mysqli->commit();
         $mysqli->autocommit(true);
         $mysqli->close();
+
         return $stmt->affected_rows;
     }
-    
-    public function &ricercaModelli($uploader, $nome) {
-        $models_f = array();
-        
-        $where = " where lower(models.uploader) like lower(?) and lower(models.nome) like lower(?) ";
-        $par = array();
-        
-        if(isset($uploader) && isset($nome)){
-            $where = " where lower(models.uploader) like lower(?) and lower(models.nome) like lower(?) ";
-            $bind ="ss";
-            $par[] = "%".$uploader."%";
-            $par[] = "%".$nome."%";
-        }
-        
-        else
-        if(isset($uploader)){
-            $where = " where lower(models.uploader) like lower(?) ";
-            $bind ="s";
-            $par[] = "%".$uploader."%";
-        }
-        
-        else
-        if(isset($nome)){
-            $where = " where lower(models.nome) like lower(?) ";
-            $bind ="s";
-            $par[] = "%".$nome."%";
-        }
-        
-        $query = "select 
-                  models.id models_nome,
-                  models.data models_data,
-				  models.dimensione models_dimensione,
-                  models.nome models_nome,
-                  models.uploader models_uploader,
-				  models.descrizione models_descrizione
 
-                  from models 
-                  ".$where;
-        
+    public function &ricercaModelli($descrizione, $nome) {
+        $models_f = array();
+
+        $where = " where lower(coltello.descrizione) like lower(?) and lower(coltello.nome) like lower(?) ";
+        $par = array();
+
+        if (isset($descrizione) && isset($nome)) {
+            $where = " where lower(coltello.descrizione) like lower(?) and lower(coltello.nome) like lower(?) ";
+            $bind = "ss";
+            $par[] = "%" . $descrizione . "%";
+            $par[] = "%" . $nome . "%";
+        } else
+        if (isset($descrizione)) {
+            $where = " where lower(coltello.descrizione) like lower(?) ";
+            $bind = "s";
+            $par[] = "%" . $descrizione . "%";
+        } else
+        if (isset($nome)) {
+            $where = " where lower(coltello.nome) like lower(?) ";
+            $bind = "s";
+            $par[] = "%" . $nome . "%";
+        }
+
+        $query = "select 
+                  coltello.id coltello_nome,
+                  coltello.data coltello_data,
+                  coltello.nome coltello_nome,
+                  coltello.descrizione coltello_descrizione
+
+                  from coltello 
+                  " . $where;
+
         $mysqli = Db::getInstance()->connectDb();
         if (!isset($mysqli)) {
             error_log("[ricercaEsami] impossibile inizializzare il database");
@@ -330,7 +324,7 @@ class ModelFactory {
             $mysqli->close();
             return $models_f;
         }
-        
+
         switch (count($par)) {
             case 1:
                 if (!$stmt->bind_param($bind, $par[0])) {
@@ -354,8 +348,7 @@ class ModelFactory {
         $mysqli->close();
         return $models_f;
     }
-    
-    
+
 }
 
 ?>

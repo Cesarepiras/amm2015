@@ -143,7 +143,7 @@ if (!$vd->isJson()) {
                 <footer>
                     <div id="footer">
                         <p>
-                            Progetto Amministrazione di Sistema di Cesare Piras.
+                            Progetto per Amministrazione di Sistema di Cesare Piras.
                         </p>
 
 

@@ -40,40 +40,36 @@ switch ($vd->getSottoPagina()) {
 
     <?php case 'utenti': ?>
         <p>
-            In this page you can view the infos of all the users in our database, such as:
+            In questa pagina puoi vedere le informazioni sugli utenti, come:
         </p>
         <ul>
             <li>Username</li>
-            <li>City</li>
+            <li>Città</li>
             <li>Email</li>
         </ul>
         <?php break; ?>
     <?php case 'el_modelli': ?>
         <p>
-            In this page you can search for the models in our database. You can filter by:
+            In questa pagina puoi cercare coltelli filtrando per nome.
         </p>
-        <ul>
-            <li>Uploader</li>
-            <li>Name</li>
-        </ul>
         <?php break; ?>
     <?php default:
         ?>
         <p>
-            Select one of the following sections of your 3D world:
+            Seleziona una dei seguenti campi:
         </p>
         <ol>
             <li>
-                <strong>Personal Infos</strong> to edit your account's infos, such as your email or password.
+                <strong>Info Personali</strong> per vedere e modificare le tue info personali.
             </li>
             <li>
-                <strong>3d models database</strong> to view all the beautiful models on our database.
+                <strong>Database Coltelli</strong> per vedere il database dei nostri coltelli.
             </li>
             <li>
-                <strong>Users List</strong> to access the complete list of our users.
+                <strong>Lista utenti</strong> per vedere la lista degli utenti del sito .
             </li>
             <li>
-                <strong>Search models</strong> to search for a model.
+                <strong>Cerca coltello</strong> per cercare coltelli nel database.
             </li>
         </ol>
         <?php break; ?>

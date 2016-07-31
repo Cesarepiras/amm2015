@@ -1,4 +1,4 @@
-<h2 class="icon-title" id="h-iscrizione">Database utenti</h2>
+<h2 class="icon-title" id="h-iscrizione">Lista utenti</h2>
 <h4>Info Admin</h1>
 <ul class="none">
     <li><strong>Nome:</strong> <?= $user->getNome() ?></li>
