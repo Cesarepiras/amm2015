@@ -11,6 +11,7 @@ class Model {
     private $nome;
     private $id;
     private $descrizione;
+    private $immagine;
 
     public function getId() {
         return $this->id;
@@ -49,6 +50,15 @@ class Model {
 
     public function setDescrizione($descrizione) {
         $this->descrizione = $descrizione;
+        return true;
+    }
+
+    public function getImmagine() {
+        return $this->immagine;
+    }
+
+    public function setImmagine($immagine) {
+        $this->immagine = $immagine;
         return true;
     }
 

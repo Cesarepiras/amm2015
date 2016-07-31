@@ -18,6 +18,10 @@ switch ($vd->getSottoPagina()) {
         include 'modelli_crea.php';
         break;
     
+    case 'modelli_visualizza':
+        include 'modelli_visualizza.php';
+        break;
+    
     case 'utenti':
         include 'utenti.php';
         break;

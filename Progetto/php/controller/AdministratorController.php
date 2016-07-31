@@ -46,13 +46,11 @@ class AdministratorController extends BaseController {
                         $vd->setSottoPagina('anagrafica');
                         break;
 
-                    // 3D models database
                     case 'modelli':
                         $models = ModelFactory::instance()->getModelsPerAdministrator($user);
                         $vd->setSottoPagina('modelli');
                         break;
 
-                    // Edit 3D model
                     case 'modelli_modifica':
                         $msg = array();
                         $models = ModelFactory::instance()->getModelsPerAdministrator($user);
@@ -64,7 +62,6 @@ class AdministratorController extends BaseController {
                         }
                         break;
 
-                    // Create a 3D model
                     case 'modelli_crea':
                         $msg = array();
                         $models = ModelFactory::instance()->getModelsPerAdministrator($user);
@@ -75,14 +72,24 @@ class AdministratorController extends BaseController {
                         }
 
                         break;
+                    
+                    case 'modelli_visualizza':
+                        $msg = array();
+                        $models = ModelFactory::instance()->getModelsPerAdministrator($user);
+                        $mod_model = $this->getModello($request, $msg);
+                        if (!isset($mod_model)) {
+                            $vd->setSottoPagina('modelli');
+                        } else {
+                            $vd->setSottoPagina('modelli_visualizza');
+                        }
+                        break;
 
                     // Users list
                     case 'utenti':
-						$utenti = UserFactory::instance()->getListaUsers();
+                        $utenti = UserFactory::instance()->getListaUsers();
                         $vd->setSottoPagina('utenti');
                         break;
 
-                    // Search 3D models
                     case 'el_modelli':
                         $models = ModelFactory::instance()->getModelsPerAdministrator($user);
                         $vd->setSottoPagina('el_modelli');
@@ -90,16 +97,16 @@ class AdministratorController extends BaseController {
                         $vd->addScript("../js/elencoModelli.js");
                         break;
 
-                    // Manage the Ajax request for models filtering
+                    // Manage the Ajax request for filtering
                     case 'filtra_modelli':
                         $vd->toggleJson();
                         $vd->setSottoPagina('el_modelli_json');
                         $errori = array();
-
-                        if (isset($request['uploader'])) {
-                            $uploader = $request['uploader'];
+                        
+                        if (isset($request['descrizione'])) {
+                            $descrizione = $request['descrizione'];
                         }else{
-                            $uploader = null;
+                            $descrizione = null;
                         }
 
                         if (isset($request['nome'])) {
@@ -108,7 +115,7 @@ class AdministratorController extends BaseController {
                             $nome = null;
                         }
      
-                        $models_f = ModelFactory::instance()->ricercaModelli($uploader, $nome);
+                        $models_f = ModelFactory::instance()->ricercaModelli($descrizione, $nome);
 
                         break;
 
@@ -152,7 +159,6 @@ class AdministratorController extends BaseController {
                         $this->showHomeUtente($vd);
                         break;
 
-                    // Model edit request
                     case 'a_modifica':
                         $models = ModelFactory::instance()->getModelsPerAdministrator($user);
                         if (isset($request['modello'])) {
@@ -164,7 +170,6 @@ class AdministratorController extends BaseController {
                         $this->showHomeUtente($vd);
                         break;
 
-                    // Model save request
                     case 'a_salva':
                         $msg = array();
                         if (isset($request['modello'])) {
@@ -192,14 +197,12 @@ class AdministratorController extends BaseController {
                         $this->showHomeUtente($vd);
                         break;
 
-                    // Page for creating a new model
                     case 'a_crea':
                         $models = ModelFactory::instance()->getModelsPerAdministrator($user);
                         $vd->setSottoPagina('modelli_crea');
                         $this->showHomeUtente($vd);
                         break;
 
-                    // Create a new model
                     case 'a_nuovo':
                         $msg = array();
                         $nuovo = new Model();
@@ -216,7 +219,6 @@ class AdministratorController extends BaseController {
                         $this->showHomeUtente($vd);
                         break;
 
-                    // Delete a model
                     case 'a_cancella':
                         if (isset($request['modello'])) {
                             $intVal = filter_var($request['modello'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
@@ -235,23 +237,19 @@ class AdministratorController extends BaseController {
                         $this->showHomeUtente($vd);
                         break;
 
-                    // Search model
                     case 'e_cerca':
                         $msg = array();
                         $this->creaFeedbackUtente($msg, $vd, "Lo implementiamo con il db ;)");
                         $this->showHomeUtente($vd);
                         break;
                     case 'a_visualizza':
+                        $models = ModelFactory::instance()->getModelsPerAdministrator($user);
                         if (isset($request['modello'])) {
                             $intVal = filter_var($request['modello'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
                             if (isset($intVal)) {
-                                $mod_model = ModelFactory::instance()->cercaModelPerId($intVal);
-                                if ($mod_model != null) {
-                                    
-                                }
+                                $mod_model = $this->cercaModelloPerId($intVal, $models);
                             }
                         }
-                        $models = ModelFactory::instance()->getModelPerAdministrator($user);
                         $this->showHomeUtente($vd);
                         break;
 
@@ -273,12 +271,6 @@ class AdministratorController extends BaseController {
         require basename(__DIR__) . '/../view/master.php';
     }
 
-    /**
-     * Updates a model
-     * @param Modello $mod_model the model to be edited
-     * @param array $request the request
-     * @param array $msg an error array
-     */
     private function updateModello($mod_model, &$request, &$msg) {
         if (isset($request['data'])) {
             $data = DateTime::createFromFormat("d/m/Y", $request['data']);
@@ -300,12 +292,6 @@ class AdministratorController extends BaseController {
         }
     }
 
-    /**
-     * Search a model by id
-     * @param int $id the requested id
-     * @param array $models a Model array
-     * @return Modello the model with the requested id, null otherwise
-     */
     private function cercaModelloPerId($id, &$models) {
         foreach ($models as $model) {
             if ($model->getId() == $id) {
@@ -316,12 +302,7 @@ class AdministratorController extends BaseController {
         return null;
     }
     
-    /**
-     * Returns the requested model
-     * @param array $request HTTP request
-     * @param array $msg an error array
-     * @return Modello selected model, null otherwise
-     */
+
     private function getModello(&$request, &$msg) {
         if (isset($request['modello'])) {
             $model_id = filter_var($request['modello'], FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);

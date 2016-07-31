@@ -108,33 +108,6 @@ class ModelFactory {
         $mysqli->close();
         return $models;
     }
-    
-    
-    public function &getModelPerAdministrator(Administrator $admin) {
-        $models = array();
-
-        $query = "select coltello.id coltello_id from coltello";
-        $mysqli = Db::getInstance()->connectDb();
-        if (!isset($mysqli)) {
-            error_log("[getModelsPerAdministrator] impossibile inizializzare il database");
-            $mysqli->close();
-            return $models;
-        }
-
-        $stmt = $mysqli->stmt_init();
-        $stmt->prepare($query);
-        if (!$stmt) {
-            error_log("[getModelsPerAdministrator] impossibile" .
-                    " inizializzare il prepared statement");
-            $mysqli->close();
-            return null;
-        }
-
-        $models = self::caricaModelliDaStmt($stmt);
-
-        $mysqli->close();
-        return $models[0];
-    }
 
     public function &getModelsPerUser(Utente $utente) {
         $models = array();
@@ -195,12 +168,14 @@ class ModelFactory {
         return $models;
     }
 
+    
     public function creaDaArray($row) {
         $model = new Model();
         $model->setId($row['coltello_id']);
         $model->setNome($row['coltello_nome']);
         $model->setData(new DateTime($row['coltello_data']));
         $model->setDescrizione($row['coltello_descrizione']);
+        
         return $model;
     }
 

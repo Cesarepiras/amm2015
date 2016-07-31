@@ -32,7 +32,7 @@ if (!$vd->isJson()) {
             <?php
             foreach ($vd->getScripts() as $script) {
                 ?>
-                <script type="text/javascript" src="//<?= $script ?>"></script>
+                <script type="text/javascript" src="<?= $script ?>"></script>
                 <?php
             }
             ?>

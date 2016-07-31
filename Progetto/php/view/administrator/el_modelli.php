@@ -5,9 +5,13 @@
     </div>
 </div>
 <div class="input-form">
+    <form>
     <h3>Filtra</h3>
         <label for="nome">Nome</label>
         <input name="nome" id="nome" type="text"/>
+        <br/>
+        <label for="descrizione">Descrizione</label>
+        <input name="descrizione" id="descrizione" type="text"/>
         <br/>
         <button id="filtra" type="submit" name="cmd" value="e_cerca">Cerca coltelli</button>
     </form>
@@ -19,7 +23,7 @@
 
 <p id="nessuno">Nessun coltello trovato</p>
 
-<table id="tabella_modelli">
+<table id="tabella_coltelli">
     <thead>
         <tr>
             <th>Id</th>

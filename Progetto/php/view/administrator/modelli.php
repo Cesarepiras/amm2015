@@ -13,10 +13,9 @@
                 <th class="iscrizione-col-small">ID</th>
                 <th class="iscrizione-col-small">Data</th>
                 <th class="iscrizione-col-small">Nome</th>
-                <th class="iscrizione-col-small">Descrizione</th>
                 <th class="iscrizione-col-small">Modifica</th>
                 <th class="iscrizione-col-small">Elimina</th>
-                <th class="iscrizione-col-small">Foto</th>
+                <th class="iscrizione-col-small">Info</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +27,6 @@
                     <td><?= $model->getId() ?></td>
                     <td><?= $model->getData()->format('d/m/Y') ?></td>
                     <td><?= $model->getNome() ?></td>
-                    <td><?= $model->getDescrizione() ?></td>
                     <td>
                         <a href="administrator/modelli_modifica?modello=<?= $model->getId() ?><?= $vd->scriviToken('&') ?>" title="Edit Knife">
                             <img  src="../images/edit-action.png" alt="Modifica">
@@ -40,7 +38,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="administrator/modelli?cmd=a_visualizza&modello=<?= $model->getId() ?><?= $vd->scriviToken('&') ?>" title="View Knife">
+                        <a href="administrator/modelli_visualizza?modello=<?= $model->getId() ?><?= $vd->scriviToken('&') ?>" title="View Knife">
                             <img  src="../images/info.png" alt="Visualizza">
                         </a>
                     </td>
